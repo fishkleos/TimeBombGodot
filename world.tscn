@@ -11,10 +11,17 @@ script/source = "extends Node2D
 # BOMB FOLLOW SCRIPT
 # Lag Speed
 @export var follow_speed = 0.5
+@onready var ngising = \"ngising\"
 
 func _process(delta):
+<<<<<<< HEAD
 	# Calculate the direction from bomb to target node
 	var direction_to_target = $Player.global_position - $Bomb.global_position
+=======
+	# Calculate the direction from bomb to player
+	print(ngising)
+	var direction_to_player = $Player.global_position - $Bomb.global_position
+>>>>>>> parent of feb5008 (Property of fish)
 
 	# Calculate the position where the bomb should move towards
 	var target_position = $Player.global_position

@@ -1,48 +1,49 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3lwxsrnipgle"]
+[gd_scene load_steps=6 format=3 uid="uid://d3lwxsrnipgle"]
 
 [ext_resource type="Texture2D" uid="uid://cudbsh20obn51" path="res://B3.png" id="1_hpr8r"]
-[ext_resource type="PackedScene" uid="uid://gc2qbmfdiove" path="res://player.tscn" id="1_jbd01"]
 [ext_resource type="PackedScene" uid="uid://cgybo8hl3g1jb" path="res://dummy.tscn" id="3_k4xab"]
 [ext_resource type="PackedScene" uid="uid://dcm6nsea5l3vd" path="res://bomb.tscn" id="4_c1xy8"]
 
-[sub_resource type="GDScript" id="GDScript_f24bi"]
+[sub_resource type="GDScript" id="GDScript_a0vwl"]
 script/source = "extends Node2D
 
 # BOMB FOLLOW SCRIPT
 # Lag Speed
 @export var follow_speed = 0.5
 
+# Reference to the current target
+var target_node: Node2D = null
+
+func _ready():
+	# Set initial target to $Player
+	target_node = $Player
+
 func _process(delta):
 	# Calculate the direction from bomb to target node
-	var direction_to_target = $Player.global_position - $Bomb.global_position
+	var direction_to_target = target_node.global_position - $Bomb.global_position
 
 	# Calculate the position where the bomb should move towards
-	var target_position = $Player.global_position
+	var target_position = target_node.global_position
 
 	# Move the bomb a fraction of the distance towards the target position
 	$Bomb.global_position += direction_to_target.normalized() * (direction_to_target.length() * follow_speed)
 
-#	# Check if the target should change to $Dummy
-#	if some_condition:  # Replace this with your actual condition
-#		target_node = $Dummy
+	# Check if the target should change to $Dummy
+	if some_condition:  # Replace this with your actual condition
+		target_node = $Dummy
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awh85"]
 size = Vector2(320, 80)
 
 [node name="World" type="Node2D"]
-scale = Vector2(1, 0.99344)
-script = SubResource("GDScript_f24bi")
-
-[node name="Bomb" parent="." instance=ExtResource("4_c1xy8")]
-position = Vector2(128, 88)
-script = null
+script = SubResource("GDScript_a0vwl")
 
 [node name="Dummy" parent="." instance=ExtResource("3_k4xab")]
 position = Vector2(184, 96)
 
-[node name="Player" parent="." instance=ExtResource("1_jbd01")]
-position = Vector2(72, 56.3698)
+[node name="Bomb" parent="." instance=ExtResource("4_c1xy8")]
+position = Vector2(128, 88)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 

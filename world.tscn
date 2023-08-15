@@ -12,9 +12,11 @@ script/source = "extends Node2D
 
 # Lag Speed
 @export var follow_speed = 0.5
+@onready var ngising = \"ngising\"
 
 func _process(delta):
 	# Calculate the direction from bomb to player
+	print(ngising)
 	var direction_to_player = $Player.global_position - $Bomb.global_position
 
 	# Calculate the position where the bomb should move towards

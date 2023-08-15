@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgybo8hl3g1jb"]
+
+[ext_resource type="Texture2D" uid="uid://babr7vwh8ea6r" path="res://B2.png" id="1_y7f53"]
+
+[sub_resource type="GDScript" id="GDScript_r33lx"]
+script/source = "extends CharacterBody2D
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgd7w"]
+size = Vector2(16, 16)
+
+[node name="Dummy" type="Node2D"]
+
+[node name="Dummy" type="CharacterBody2D" parent="."]
+script = SubResource("GDScript_r33lx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy"]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(1.33333, 1.33333)
+texture = ExtResource("1_y7f53")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy"]
+shape = SubResource("RectangleShape2D_cgd7w")

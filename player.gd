@@ -1,12 +1,10 @@
 extends CharacterBody2D
 
-
 @export var SPEED = 200.0
 @export var JUMP_VELOCITY = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -27,6 +25,8 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+signal goto_dummy()
 
 func _on_area_2d_area_entered(area):
-	print("nempel")
+	if area.is_in_group("Dummy"):
+		emit_signal("goto_dummy")

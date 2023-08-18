@@ -7,7 +7,6 @@
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ll7eu"]
-size = Vector2(18, 18)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_vmk3w")

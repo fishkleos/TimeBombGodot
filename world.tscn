@@ -13,13 +13,14 @@ size = Vector2(304, 24)
 script = ExtResource("1_31d2x")
 
 [node name="Player" parent="." instance=ExtResource("1_jbd01")]
-position = Vector2(56, 56)
+position = Vector2(129, 96)
+SPEED = 150.0
 
 [node name="Dummy" parent="." instance=ExtResource("3_k4xab")]
 position = Vector2(184, 96)
 
 [node name="Bomb" parent="." instance=ExtResource("4_c1xy8")]
-position = Vector2(128, 88)
+position = Vector2(111, 92)
 script = null
 
 [node name="Ground" type="StaticBody2D" parent="."]
@@ -32,3 +33,10 @@ texture = ExtResource("1_hpr8r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(160, 116)
 shape = SubResource("RectangleShape2D_awh85")
+
+[node name="GrabCooldown" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="goto_dummy" from="Player" to="." method="_on_player_goto_dummy"]
+[connection signal="goto_player" from="Dummy" to="." method="_on_dummy_goto_player"]
